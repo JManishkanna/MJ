@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets - CineBook</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> CineBook</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="movies.html"><i class="fas fa-video"></i> Movies</a></li>
+                    <li><a href="theaters.html"><i class="fas fa-landmark"></i> Theaters</a></li>
+                    <li><a href="snacks.html"><i class="fas fa-popcorn"></i> Snacks</a></li>
+                    <li><a href="parking.html"><i class="fas fa-parking"></i> Parking</a></li>
+                    <li><a href="updates.html"><i class="fas fa-bell"></i> Updates</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="ott.html"><i class="fas fa-tv"></i> OTT</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="adminLoginBtn">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Booking Section -->
+    <section class="booking-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Select Your Seats</h1>
+                <p>Choose the perfect seats for your movie experience</p>
+            </div>
+            
+            <div class="booking-content">
+                <!-- Movie and Show Information -->
+                <div class="booking-summary">
+                    <div class="movie-info-card">
+                        <img id="bookingMoviePoster" src="" alt="" class="movie-poster-small">
+                        <div class="movie-details">
+                            <h2 id="bookingMovieTitle"></h2>
+                            <p id="bookingTheater"></p>
+                            <p id="bookingShowtime"></p>
+                            <p id="bookingDate"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-meta">
+                        <div class="price-summary">
+                            <h3>Price Summary</h3>
+                            <div class="price-item">
+                                <span>Tickets:</span>
+                                <span id="ticketCount">0</span>
+                                <span id="ticketPrice">-</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Snacks:</span>
+                                <span id="snackCount">0</span>
+                                <span id="snackPrice">₹0</span>
+                            </div>
+                            <div class="price-item total">
+                                <span>Total:</span>
+                                <span id="totalPrice">₹0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="smart-select">
+                            <button class="btn btn-secondary btn-large" id="smartSelectBtn">
+                                <i class="fas fa-magic"></i> Smart Select Seats
+                            </button>
+                            <p class="smart-select-info">Automatically selects best available seats</p>
+                        </div>
+                        
+                        <button class="btn btn-primary btn-large" id="proceedToPayment" disabled>
+                            <i class="fas fa-credit-card"></i> Proceed to Payment
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Group Seat Auto-Finder Section -->
+                <div class="group-seat-finder">
+                    <h3>Group Seat Auto-Finder</h3>
+                    <div class="finder-controls">
+                        <label for="numPeople">Number of people:</label>
+                        <input type="number" id="numPeople" min="1" max="8" value="1">
+                        <button class="btn btn-primary" id="findBestSeatsBtn">Find Best Seats</button>
+                    </div>
+                </div>
+                
+                <div class="seat-layout-container">
+                    <!-- Theater Screen -->
+                    <div class="theater-screen">
+                        <div class="screen">SCREEN</div>
+                    </div>
+                    
+                    <!-- Seat Selection -->
+                    <div class="seat-selection">
+                        <div class="seating-legend">
+                            <div class="legend-item">
+                                <div class="seat available"></div>
+                                <span>Available</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat booked"></div>
+                                <span>Booked</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat popular"></div>
+                                <span>Popular</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat vip"></div>
+                                <span>Premium</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="seat selected"></div>
+                                <span>Selected</span>
+                            </div>
+                        </div>
+                        
+                        <div class="seats-container" id="seatsContainer">
+                            <!-- Seats will be generated dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Right Side Panel -->
+                    <div class="right-panel">
+                        <div class="selected-seats-panel">
+                            <h3>Selected Seats</h3>
+                            <div id="selectedSeatsListPanel">
+                                <p>No seats selected yet</p>
+                            </div>
+                        </div>
+                        
+                        <div class="price-breakdown">
+                            <h3>Price Breakdown</h3>
+                            <div class="price-item">
+                                <span>Ticket Price:</span>
+                                <span id="panelTicketPrice">₹0</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Convenience Fee:</span>
+                                <span id="convenienceFee">₹0</span>
+                            </div>
+                            <div class="price-item total">
+                                <span>Total:</span>
+                                <span id="panelTotalPrice">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Selected Seats Display -->
+                <div class="selected-seats-display">
+                    <h3>Selected Seats</h3>
+                    <div id="selectedSeatsList">
+                        <p>No seats selected yet</p>
+                    </div>
+                </div>
+                        <div class="smart-select">
+                            <button class="btn btn-secondary btn-large" id="smartSelectBtn">
+                                <i class="fas fa-magic"></i> Smart Select Seats
+                            </button>
+                            <p class="smart-select-info">Automatically selects best available seats</p>
+                        </div>
+                
+                <!-- Add Snacks Option -->
+                <div class="add-snacks-section">
+                    <h3>Add Snacks to Your Booking</h3>
+                    <div class="snacks-grid" id="snacksGrid">
+                        <!-- Snacks will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CineBook</h3>
+                    <p>Your ultimate destination for movie entertainment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="theaters.html">Theaters</a></li>
+                        <li><a href="snacks.html">Snacks</a></li>
+                        <li><a href="history.html">Booking History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-utils.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>

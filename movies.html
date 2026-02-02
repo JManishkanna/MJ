@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies - CineBook</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/movies.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> CineBook</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="movies.html" class="active"><i class="fas fa-video"></i> Movies</a></li>
+                    <li><a href="theaters.html"><i class="fas fa-landmark"></i> Theaters</a></li>
+                    <li><a href="snacks.html"><i class="fas fa-popcorn"></i> Snacks</a></li>
+                    <li><a href="parking.html"><i class="fas fa-parking"></i> Parking</a></li>
+                    <li><a href="updates.html"><i class="fas fa-bell"></i> Updates</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="ott.html"><i class="fas fa-tv"></i> OTT</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="adminLoginBtn">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Movies Page -->
+    <section class="movies-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Now Showing</h1>
+                <p>Discover the latest movies in theaters</p>
+            </div>
+            
+            <div class="movies-filters">
+                <div class="filter-group">
+                    <label for="genreFilter">Genre:</label>
+                    <select id="genreFilter">
+                        <option value="all">All Genres</option>
+                        <option value="Action">Action</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Romance">Romance</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="ratingFilter">Minimum Rating:</label>
+                    <select id="ratingFilter">
+                        <option value="0">All Ratings</option>
+                        <option value="5">5+ Stars</option>
+                        <option value="6">6+ Stars</option>
+                        <option value="7">7+ Stars</option>
+                        <option value="8">8+ Stars</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sortFilter">Sort By:</label>
+                    <select id="sortFilter">
+                        <option value="title">Title A-Z</option>
+                        <option value="rating">Rating (High to Low)</option>
+                        <option value="date">Release Date</option>
+                        <option value="price">Price (Low to High)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="movies-grid" id="moviesGrid">
+                <!-- Movies will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CineBook</h3>
+                    <p>Your ultimate destination for movie entertainment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="theaters.html">Theaters</a></li>
+                        <li><a href="snacks.html">Snacks</a></li>
+                        <li><a href="history.html">Booking History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-utils.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/movies.js"></script>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking - CineBook</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> CineBook</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="movies.html"><i class="fas fa-video"></i> Movies</a></li>
+                    <li><a href="theaters.html"><i class="fas fa-landmark"></i> Theaters</a></li>
+                    <li><a href="snacks.html"><i class="fas fa-popcorn"></i> Snacks</a></li>
+                    <li><a href="parking.html" class="active"><i class="fas fa-parking"></i> Parking</a></li>
+                    <li><a href="updates.html"><i class="fas fa-bell"></i> Updates</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="ott.html"><i class="fas fa-tv"></i> OTT</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="adminLoginBtn">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Parking Page -->
+    <section class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Parking Services</h1>
+                <p>Secure and convenient parking for your movie experience</p>
+            </div>
+            
+            <div class="parking-container">
+                <div class="parking-info">
+                    <div class="info-card">
+                        <h3><i class="fas fa-car"></i> Car Parking</h3>
+                        <p>Spacious parking area for cars with easy access to theater</p>
+                        <div class="price-info">
+                            <span class="price">₹<span id="carPrice">99</span></span>
+                            <span class="per">per visit</span>
+                        </div>
+                        <div class="availability">
+                            <span>Available spots: </span>
+                            <span id="carAvailable">85</span>/<span id="carTotal">100</span>
+                        </div>
+                        <button class="btn btn-primary book-parking-btn" data-type="car">
+                            <i class="fas fa-parking"></i> Book Car Parking
+                        </button>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3><i class="fas fa-motorcycle"></i> Bike Parking</h3>
+                        <p>Secure covered area for motorcycles and bikes</p>
+                        <div class="price-info">
+                            <span class="price">₹<span id="bikePrice">89</span></span>
+                            <span class="per">per visit</span>
+                        </div>
+                        <div class="availability">
+                            <span>Available spots: </span>
+                            <span id="bikeAvailable">32</span>/<span id="bikeTotal">50</span>
+                        </div>
+                        <button class="btn btn-primary book-parking-btn" data-type="bike">
+                            <i class="fas fa-parking"></i> Book Bike Parking
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="parking-map">
+                    <h3><i class="fas fa-map-marked-alt"></i> Parking Map</h3>
+                    <div class="map-container">
+                        <div class="parking-level">
+                            <h4>Ground Level - Car Parking</h4>
+                            <div class="parking-spots" id="carSpots">
+                                <!-- Car spots will be generated dynamically -->
+                            </div>
+                        </div>
+                        <div class="parking-level">
+                            <h4>Basement Level - Bike Parking</h4>
+                            <div class="parking-spots" id="bikeSpots">
+                                <!-- Bike spots will be generated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="parking-rules">
+                    <h3><i class="fas fa-info-circle"></i> Parking Rules</h3>
+                    <ul>
+                        <li>Parking is valid for the duration of your movie</li>
+                        <li>Overnight parking is not permitted</li>
+                        <li>Lost parking tickets: ₹25 fee for replacement</li>
+                        <li>Motorcycles park free with valid movie ticket</li>
+                        <li>Electric vehicle charging stations available</li>
+                        <li>Valet parking service available at main entrance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CineBook</h3>
+                    <p>Your ultimate destination for movie entertainment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="theaters.html">Theaters</a></li>
+                        <li><a href="snacks.html">Snacks</a></li>
+                        <li><a href="history.html">Booking History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadParkingInfo();
+            generateParkingMap();
+            setupEventListeners();
+        });
+
+        function loadParkingInfo() {
+            const parking = getParking();
+            
+            document.getElementById('carPrice').textContent = parking.car.price.toFixed(2);
+            document.getElementById('bikePrice').textContent = parking.bike.price.toFixed(2);
+            document.getElementById('carAvailable').textContent = parking.car.available;
+            document.getElementById('carTotal').textContent = parking.car.total;
+            document.getElementById('bikeAvailable').textContent = parking.bike.available;
+            document.getElementById('bikeTotal').textContent = parking.bike.total;
+        }
+
+        function generateParkingMap() {
+            const parking = getParking();
+            
+            // Generate car spots
+            const carSpots = document.getElementById('carSpots');
+            let carSpotsHTML = '';
+            for (let i = 1; i <= parking.car.total; i++) {
+                const isAvailable = i <= parking.car.available;
+                const spotClass = isAvailable ? 'spot available' : 'spot occupied';
+                carSpotsHTML += `<div class="${spotClass}" data-spot="${i}">C${i}</div>`;
+            }
+            carSpots.innerHTML = carSpotsHTML;
+            
+            // Generate bike spots
+            const bikeSpots = document.getElementById('bikeSpots');
+            let bikeSpotsHTML = '';
+            for (let i = 1; i <= parking.bike.total; i++) {
+                const isAvailable = i <= parking.bike.available;
+                const spotClass = isAvailable ? 'spot available' : 'spot occupied';
+                bikeSpotsHTML += `<div class="${spotClass}" data-spot="${i}">B${i}</div>`;
+            }
+            bikeSpots.innerHTML = bikeSpotsHTML;
+        }
+
+        function setupEventListeners() {
+            document.getElementById('adminLoginBtn').addEventListener('click', function() {
+                if (isAdmin()) {
+                    window.location.href = 'admin/index.html';
+                } else {
+                    showAdminLogin();
+                }
+            });
+            
+            document.querySelectorAll('.book-parking-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const type = this.getAttribute('data-type');
+                    bookParking(type);
+                });
+            });
+        }
+
+        function bookParking(type) {
+            const parking = getParking();
+            const spotInfo = parking[type];
+            
+            if (spotInfo.available <= 0) {
+                alert(`Sorry, no ${type} parking spots available at the moment.`);
+                return;
+            }
+            
+            const spotNumber = spotInfo.total - spotInfo.available + 1;
+            const confirmation = confirm(`Book ${type} parking for ₹${spotInfo.price}?\nYour spot number: ${type.charAt(0).toUpperCase() + spotNumber}`);
+            
+            if (confirmation) {
+                // Update availability
+                spotInfo.available--;
+                saveParking(parking);
+                
+                alert(`Parking booked successfully!
+Spot: ${type.charAt(0).toUpperCase() + spotNumber}
+Price: ₹${spotInfo.price}
+
+Please proceed to the parking area and display this confirmation.`);
+                
+                // Refresh the page to show updated availability
+                location.reload();
+            }
+        }
+
+        function showAdminLogin() {
+            const password = prompt('Enter admin password:');
+            if (password === 'admin123') {
+                loginAdmin();
+                alert('Admin login successful!');
+                window.location.href = 'admin/index.html';
+            } else if (password) {
+                alert('Incorrect password!');
+            }
+        }
+    </script>
+    
+    <style>
+        .page-content {
+            padding: 2rem 0;
+            background: #f0f2f5;
+        }
+        
+        .parking-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+        
+        .parking-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+        
+        .price-info {
+            margin: 1.5rem 0;
+        }
+        
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+        
+        .per {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .availability {
+            margin: 1rem 0;
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        .book-parking-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .parking-map {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .parking-map h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .parking-level {
+            margin-bottom: 2rem;
+        }
+        
+        .parking-level h4 {
+            color: #333;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .parking-spots {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .spot {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border-radius: 5px;
+        }
+        
+        .spot.available {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .spot.available:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(40,167,69,0.5);
+        }
+        
+        .spot.occupied {
+            background: #dc3545;
+            color: white;
+            opacity: 0.6;
+        }
+        
+        .parking-rules {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .parking-rules h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .parking-rules ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .parking-rules li {
+            padding: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .parking-rules li:last-child {
+            border-bottom: none;
+        }
+        
+        .parking-rules li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: 700;
+        }
+        
+        @media (max-width: 768px) {
+            .parking-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .parking-spots {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details - CineBook</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/movie.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> CineBook</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="movies.html" class="active"><i class="fas fa-video"></i> Movies</a></li>
+                    <li><a href="theaters.html"><i class="fas fa-landmark"></i> Theaters</a></li>
+                    <li><a href="snacks.html"><i class="fas fa-popcorn"></i> Snacks</a></li>
+                    <li><a href="parking.html"><i class="fas fa-parking"></i> Parking</a></li>
+                    <li><a href="updates.html"><i class="fas fa-bell"></i> Updates</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="ott.html"><i class="fas fa-tv"></i> OTT</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="adminLoginBtn">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Movie Details Section -->
+    <section class="movie-details">
+        <div class="container">
+            <div class="movie-header" id="movieHeader">
+                <!-- Movie header will be loaded dynamically -->
+            </div>
+            
+            <div class="movie-content">
+                <div class="movie-poster-section">
+                    <img id="moviePoster" src="" alt="" class="movie-poster-large">
+                    <button class="btn btn-primary btn-large book-ticket-btn" id="bookTicketBtn">
+                        <i class="fas fa-ticket-alt"></i> Book Tickets
+                    </button>
+                </div>
+                
+                <div class="movie-info-section">
+                    <h1 id="movieTitle"></h1>
+                    <div class="movie-meta-large">
+                        <span id="movieGenre"></span>
+                        <span id="movieDuration"></span>
+                        <span class="rating-large">
+                            <i class="fas fa-star"></i> <span id="movieRating"></span>
+                        </span>
+                    </div>
+                    
+                    <p class="movie-description" id="movieDescription"></p>
+                    
+                    <div class="movie-details-grid">
+                        <div class="detail-item">
+                            <h3><i class="fas fa-user-friends"></i> Cast</h3>
+                            <p id="movieCast"></p>
+                        </div>
+                        <div class="detail-item">
+                            <h3><i class="fas fa-video"></i> Director</h3>
+                            <p id="movieDirector"></p>
+                        </div>
+                        <div class="detail-item">
+                            <h3><i class="fas fa-calendar"></i> Release Date</h3>
+                            <p id="movieReleaseDate"></p>
+                        </div>
+                        <div class="detail-item">
+                            <h3><i class="fas fa-tags"></i> Genre</h3>
+                            <p id="movieGenreFull"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="showtimes-section">
+                        <h3><i class="fas fa-clock"></i> Showtimes</h3>
+                        <div class="showtimes-grid" id="showtimesGrid">
+                            <!-- Showtimes will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trailer Section -->
+            <div class="trailer-section">
+                <h2>Watch Trailer</h2>
+                <div class="trailer-container">
+                    <iframe id="movieTrailer" src="" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <!-- Reviews Section -->
+            <div class="reviews-section">
+                <h2>Reviews & Ratings</h2>
+                <div class="reviews-container">
+                    <div class="review-summary">
+                        <div class="overall-rating">
+                            <span class="rating-number" id="overallRating">0.0</span>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p>Based on 1,248 reviews</p>
+                        </div>
+                    </div>
+                    
+                    <div class="user-reviews">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer">
+                                    <div class="avatar">JD</div>
+                                    <div>
+                                        <h4>John Doe</h4>
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="review-date">2 days ago</span>
+                            </div>
+                            <p class="review-text">Absolutely amazing movie! The visuals are stunning and the story keeps you engaged throughout. Highly recommended!</p>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer">
+                                    <div class="avatar">MS</div>
+                                    <div>
+                                        <h4>Mary Smith</h4>
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="review-date">1 week ago</span>
+                            </div>
+                            <p class="review-text">Great entertainment value. The action sequences are spectacular and the characters are well-developed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CineBook</h3>
+                    <p>Your ultimate destination for movie entertainment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="theaters.html">Theaters</a></li>
+                        <li><a href="snacks.html">Snacks</a></li>
+                        <li><a href="history.html">Booking History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/movie.js"></script>
+</body>
+</html>

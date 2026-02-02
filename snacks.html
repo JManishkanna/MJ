@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snacks - CineBook</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> CineBook</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="movies.html"><i class="fas fa-video"></i> Movies</a></li>
+                    <li><a href="theaters.html"><i class="fas fa-landmark"></i> Theaters</a></li>
+                    <li><a href="snacks.html" class="active"><i class="fas fa-popcorn"></i> Snacks</a></li>
+                    <li><a href="parking.html"><i class="fas fa-parking"></i> Parking</a></li>
+                    <li><a href="updates.html"><i class="fas fa-bell"></i> Updates</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="ott.html"><i class="fas fa-tv"></i> OTT</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="adminLoginBtn">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Snacks Page -->
+    <section class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Movie Snacks</h1>
+                <p>Enhance your movie experience with delicious snacks</p>
+            </div>
+            
+            <div class="snacks-categories">
+                <button class="category-btn active" data-category="all">All Items</button>
+                <button class="category-btn" data-category="Popcorn">Popcorn</button>
+                <button class="category-btn" data-category="Drinks">Drinks</button>
+                <button class="category-btn" data-category="Candy">Candy</button>
+                <button class="category-btn" data-category="Food">Food</button>
+                <button class="category-btn" data-category="Desserts">Desserts</button>
+            </div>
+            
+            <div class="snacks-grid" id="snacksGrid">
+                <!-- Snacks will be loaded dynamically -->
+            </div>
+            
+            <div class="cart-summary" id="cartSummary">
+                <h3>Order Summary</h3>
+                <div class="cart-items" id="cartItems">
+                    <p>Your cart is empty</p>
+                </div>
+                <div class="cart-total">
+                    <span>Total: </span>
+                    <span id="cartTotal">₹0</span>
+                </div>
+                <button class="btn btn-primary btn-large" id="checkoutBtn" disabled>
+                    <i class="fas fa-shopping-cart"></i> Checkout
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CineBook</h3>
+                    <p>Your ultimate destination for movie entertainment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="theaters.html">Theaters</a></li>
+                        <li><a href="snacks.html">Snacks</a></li>
+                        <li><a href="history.html">Booking History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script>
+        let cart = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSnacks();
+            setupEventListeners();
+        });
+
+        function loadSnacks() {
+            const snacks = getSnacks();
+            displaySnacks(snacks);
+        }
+
+        function displaySnacks(snacks) {
+            const container = document.getElementById('snacksGrid');
+            
+            container.innerHTML = snacks.map(snack => `
+                <div class="snack-card" data-category="${snack.category}">
+                    <img src="${snack.image}" alt="${snack.name}" class="snack-image">
+                    <div class="snack-info">
+                        <h3>${snack.name}</h3>
+                        <p class="snack-price">₹${snack.price}</p>
+                        <p class="snack-category">${snack.category}</p>
+                        <div class="quantity-controls">
+                            <button class="qty-btn minus" onclick="updateQuantity(${snack.id}, -1)">-</button>
+                            <span class="qty-display" id="qty-${snack.id}">0</span>
+                            <button class="qty-btn plus" onclick="updateQuantity(${snack.id}, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setupEventListeners() {
+            document.getElementById('adminLoginBtn').addEventListener('click', function() {
+                if (isAdmin()) {
+                    window.location.href = 'admin/index.html';
+                } else {
+                    showAdminLogin();
+                }
+            });
+            
+            document.getElementById('checkoutBtn').addEventListener('click', checkout);
+            
+            // Category filtering
+            document.querySelectorAll('.category-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    filterByCategory(this.getAttribute('data-category'));
+                    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        function filterByCategory(category) {
+            const snackCards = document.querySelectorAll('.snack-card');
+            snackCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function updateQuantity(snackId, change) {
+            const snack = getSnacks().find(s => s.id == snackId);
+            if (!snack) return;
+            
+            let cartItem = cart.find(item => item.id == snackId);
+            
+            if (!cartItem) {
+                cartItem = { ...snack, quantity: 0 };
+                cart.push(cartItem);
+            }
+            
+            const newQuantity = cartItem.quantity + change;
+            
+            if (newQuantity < 0) return;
+            if (newQuantity > 20) {
+                alert('Maximum 20 items per snack type');
+                return;
+            }
+            
+            cartItem.quantity = newQuantity;
+            
+            if (cartItem.quantity === 0) {
+                cart = cart.filter(item => item.id != snackId);
+            }
+            
+            document.getElementById(`qty-${snackId}`).textContent = newQuantity;
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartCount = document.getElementById('cartCount');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartCount.textContent = totalItems;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty</p>';
+                checkoutBtn.disabled = true;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <span>${item.name} (${item.quantity})</span>
+                        <span>₹${item.price * item.quantity}</span>
+                    </div>
+                `).join('');
+                checkoutBtn.disabled = false;
+            }
+            
+            cartTotal.textContent = `₹${totalPrice}`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const items = cart.map(item => `${item.name} (${item.quantity})`).join(', ');
+            
+            alert(`Order placed successfully!
+
+Items: ${items}
+Total: ₹${total}
+
+In a real implementation, this would proceed to payment.`);
+            
+            // Clear cart
+            cart = [];
+            document.querySelectorAll('.qty-display').forEach(el => el.textContent = '0');
+            updateCartDisplay();
+        }
+
+        function showAdminLogin() {
+            const password = prompt('Enter admin password:');
+            if (password === 'admin123') {
+                loginAdmin();
+                alert('Admin login successful!');
+                window.location.href = 'admin/index.html';
+            } else if (password) {
+                alert('Incorrect password!');
+            }
+        }
+    </script>
+    
+    <style>
+        .page-content {
+            padding: 2rem 0;
+            background: #f0f2f5;
+        }
+        
+        .cart-icon {
+            position: relative;
+            background: #ff6b6b;
+            color: white;
+            padding: 0.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .snacks-categories {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .snacks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .snack-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .snack-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .snack-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .snack-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .snack-info h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .snack-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .snack-category {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .qty-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .qty-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .cart-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+        }
+        
+        .cart-summary h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid #667eea;
+        }
+        
+        #checkoutBtn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 768px) {
+            .snacks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .snacks-categories {
+                justify-content: center;
+            }
+            
+            .cart-summary {
+                position: static;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</body>
+</html>

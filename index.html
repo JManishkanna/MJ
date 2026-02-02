@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineBook - Movie Ticket Booking</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> CineBook</h1>
+            </div>
+            
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="movies.html"><i class="fas fa-video"></i> Movies</a></li>
+                    <li><a href="theaters.html"><i class="fas fa-landmark"></i> Theaters</a></li>
+                    <li><a href="snacks.html"><i class="fas fa-popcorn"></i> Snacks</a></li>
+                    <li><a href="parking.html"><i class="fas fa-parking"></i> Parking</a></li>
+                    <li><a href="updates.html"><i class="fas fa-bell"></i> Updates</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="ott.html"><i class="fas fa-tv"></i> OTT</a></li>
+                </ul>
+            </nav></button>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="adminLoginBtn">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Book Your Movie Experience</h1>
+            <p>Discover amazing movies, comfortable theaters, and delicious snacks</p>
+            <div class="search-box">
+                <input type="text" placeholder="Search for movies, theaters..." id="searchInput">
+                <button class="btn btn-search"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Movies -->
+    <section class="featured-movies">
+        <div class="container">
+            <h2 class="section-title">Featured Movies</h2>
+            <div class="movies-grid" id="featuredMovies">
+                <!-- Movies will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Booking -->
+    <section class="quick-booking">
+        <div class="container">
+            <h2 class="section-title">Quick Booking</h2>
+            <div class="booking-form">
+                <div class="form-group">
+                    <label for="movieSelect">Select Movie</label>
+                    <select id="movieSelect">
+                        <option value="">Choose a movie</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="theaterSelect">Select Theater</label>
+                    <select id="theaterSelect">
+                        <option value="">Choose a theater</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="showtimeSelect">Show Time</label>
+                    <select id="showtimeSelect">
+                        <option value="">Select time</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-large" id="bookNowBtn">
+                    <i class="fas fa-ticket-alt"></i> Book Now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CineBook</h3>
+                    <p>Your ultimate destination for movie entertainment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="theaters.html">Theaters</a></li>
+                        <li><a href="snacks.html">Snacks</a></li>
+                        <li><a href="history.html">Booking History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-utils.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Ticket - CineBook</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/ticket.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> CineBook</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="movies.html"><i class="fas fa-video"></i> Movies</a></li>
+                    <li><a href="theaters.html"><i class="fas fa-landmark"></i> Theaters</a></li>
+                    <li><a href="snacks.html"><i class="fas fa-popcorn"></i> Snacks</a></li>
+                    <li><a href="parking.html"><i class="fas fa-parking"></i> Parking</a></li>
+                    <li><a href="updates.html"><i class="fas fa-bell"></i> Updates</a></li>
+                    <li><a href="history.html" class="active"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="ott.html"><i class="fas fa-tv"></i> OTT</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="adminLoginBtn">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ticket Section -->
+    <section class="ticket-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Your Movie Ticket</h1>
+                <p>Present this ticket at the theater entrance</p>
+            </div>
+            
+            <div class="ticket-container">
+                <div class="ticket" id="movieTicket">
+                    <!-- Ticket background with blended movie and theater image -->
+                    <div class="ticket-background" id="ticketBackground">
+                        <!-- Background will be set dynamically -->
+                    </div>
+                    
+                    <!-- Ticket content -->
+                    <div class="ticket-content">
+                        <div class="ticket-header">
+                            <div class="logo-section">
+                                <h2><i class="fas fa-film"></i> CineBook</h2>
+                                <p class="ticket-type">MOVIE TICKET</p>
+                            </div>
+                            <div class="qr-section">
+                                <img id="ticketQR" src="" alt="QR Code">
+                                <p class="booking-id">ID: <span id="bookingId"></span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="movie-details-section">
+                            <div class="movie-poster-container">
+                                <img id="ticketMoviePoster" src="" alt="Movie Poster">
+                            </div>
+                            
+                            <div class="movie-info-container">
+                                <h1 id="ticketMovieTitle"></h1>
+                                <div class="movie-meta-ticket">
+                                    <p><i class="fas fa-landmark"></i> <span id="ticketTheater"></span></p>
+                                    <p><i class="fas fa-clock"></i> <span id="ticketShowtime"></span></p>
+                                    <p><i class="fas fa-calendar"></i> <span id="ticketDate"></span></p>
+                                    <p><i class="fas fa-couch"></i> <span id="ticketSeats"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ticket-footer">
+                            <div class="price-section">
+                                <p>Total: <span id="ticketTotal"></span></p>
+                            </div>
+                            <div class="validity">
+                                <p><i class="fas fa-info-circle"></i> Valid for one-time use only</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ticket Actions -->
+                <div class="ticket-actions">
+                    <button class="btn btn-primary btn-large" onclick="printTicket()">
+                        <i class="fas fa-print"></i> Print Ticket
+                    </button>
+                    <button class="btn btn-large" onclick="downloadTicket()">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                    <button class="btn btn-large" onclick="shareTicket()">
+                        <i class="fas fa-share-alt"></i> Share Ticket
+                    </button>
+                </div>
+                
+                <!-- Booking Details -->
+                <div class="booking-details">
+                    <h3>Booking Details</h3>
+                    <div class="details-grid" id="bookingDetails">
+                        <!-- Details will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CineBook</h3>
+                    <p>Your ultimate destination for movie entertainment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="theaters.html">Theaters</a></li>
+                        <li><a href="snacks.html">Snacks</a></li>
+                        <li><a href="history.html">Booking History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-utils.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/ticket.js"></script>
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTT - CineBook</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> CineBook</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="movies.html"><i class="fas fa-video"></i> Movies</a></li>
+                    <li><a href="theaters.html"><i class="fas fa-landmark"></i> Theaters</a></li>
+                    <li><a href="snacks.html"><i class="fas fa-popcorn"></i> Snacks</a></li>
+                    <li><a href="parking.html"><i class="fas fa-parking"></i> Parking</a></li>
+                    <li><a href="updates.html"><i class="fas fa-bell"></i> Updates</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="ott.html" class="active"><i class="fas fa-tv"></i> OTT</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="adminLoginBtn">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- OTT Page -->
+    <section class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>CineBook OTT</h1>
+                <p>Stream your favorite movies and shows anytime, anywhere</p>
+            </div>
+            
+            <div class="ott-container">
+                <div class="subscription-plans">
+                    <h2><i class="fas fa-crown"></i> Subscription Plans</h2>
+                    <div class="plans-grid">
+                        <div class="plan-card">
+                            <div class="plan-header">
+                                <h3>Basic</h3>
+                                <div class="plan-price">
+                                    <span class="amount">₹649</span>
+                                    <span class="period">/month</span>
+                                </div>
+                            </div>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> SD Quality</li>
+                                <li><i class="fas fa-check"></i> 1 Screen at a time</li>
+                                <li><i class="fas fa-check"></i> 1080p Quality</li>
+                                <li><i class="fas fa-check"></i> Ad-supported content</li>
+                                <li><i class="fas fa-times"></i> Offline downloads</li>
+                                <li><i class="fas fa-times"></i> 4K Ultra HD</li>
+                            </ul>
+                            <button class="btn btn-outline" onclick="subscribe('basic')">
+                                <i class="fas fa-shopping-cart"></i> Choose Plan
+                            </button>
+                        </div>
+                        
+                        <div class="plan-card popular">
+                            <div class="popular-badge">Most Popular</div>
+                            <div class="plan-header">
+                                <h3>Standard</h3>
+                                <div class="plan-price">
+                                    <span class="amount">₹899</span>
+                                    <span class="period">/month</span>
+                                </div>
+                            </div>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> HD Quality</li>
+                                <li><i class="fas fa-check"></i> 2 Screens at a time</li>
+                                <li><i class="fas fa-check"></i> Ad-free experience</li>
+                                <li><i class="fas fa-check"></i> Offline downloads</li>
+                                <li><i class="fas fa-times"></i> 4K Ultra HD</li>
+                                <li><i class="fas fa-times"></i> HDR Support</li>
+                            </ul>
+                            <button class="btn btn-primary" onclick="subscribe('standard')">
+                                <i class="fas fa-crown"></i> Choose Plan
+                            </button>
+                        </div>
+                        
+                        <div class="plan-card">
+                            <div class="plan-header">
+                                <h3>Premium</h3>
+                                <div class="plan-price">
+                                    <span class="amount">₹1299</span>
+                                    <span class="period">/month</span>
+                                </div>
+                            </div>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> 4K Ultra HD</li>
+                                <li><i class="fas fa-check"></i> 4 Screens at a time</li>
+                                <li><i class="fas fa-check"></i> HDR Support</li>
+                                <li><i class="fas fa-check"></i> Ad-free experience</li>
+                                <li><i class="fas fa-check"></i> Offline downloads</li>
+                                <li><i class="fas fa-check"></i> Dolby Atmos Audio</li>
+                            </ul>
+                            <button class="btn btn-outline" onclick="subscribe('premium')">
+                                <i class="fas fa-gem"></i> Choose Plan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="featured-content">
+                    <h2><i class="fas fa-star"></i> Featured Content</h2>
+                    <div class="content-grid" id="featuredContent">
+                        <!-- Featured content will be loaded dynamically -->
+                    </div>
+                </div>
+                
+                <div class="devices">
+                    <h2><i class="fas fa-tv"></i> Watch on Any Device</h2>
+                    <div class="devices-grid">
+                        <div class="device-card">
+                            <i class="fas fa-tv"></i>
+                            <h3>Smart TV</h3>
+                            <p>Stream directly on your smart TV</p>
+                        </div>
+                        <div class="device-card">
+                            <i class="fas fa-laptop"></i>
+                            <h3>Computer</h3>
+                            <p>Watch on your laptop or desktop</p>
+                        </div>
+                        <div class="device-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Mobile</h3>
+                            <p>Stream on your smartphone or tablet</p>
+                        </div>
+                        <div class="device-card">
+                            <i class="fas fa-gamepad"></i>
+                            <h3>Gaming Console</h3>
+                            <p>Play on PlayStation, Xbox, and more</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CineBook</h3>
+                    <p>Your ultimate destination for movie entertainment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="theaters.html">Theaters</a></li>
+                        <li><a href="snacks.html">Snacks</a></li>
+                        <li><a href="history.html">Booking History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFeaturedContent();
+            setupEventListeners();
+        });
+
+        function loadFeaturedContent() {
+            const movies = getMovies();
+            const container = document.getElementById('featuredContent');
+            
+            container.innerHTML = movies.slice(0, 4).map(movie => `
+                <div class="content-card">
+                    <img src="${movie.poster}" alt="${movie.title}">
+                    <div class="content-info">
+                        <h3>${movie.title}</h3>
+                        <div class="content-meta">
+                            <span class="rating"><i class="fas fa-star"></i> ${movie.rating}</span>
+                            <span class="year">${new Date(movie.releaseDate).getFullYear()}</span>
+                        </div>
+                        <button class="btn btn-small" onclick="watchNow(${movie.id})">
+                            <i class="fas fa-play"></i> Watch Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setupEventListeners() {
+            document.getElementById('adminLoginBtn').addEventListener('click', function() {
+                if (isAdmin()) {
+                    window.location.href = 'admin/index.html';
+                } else {
+                    showAdminLogin();
+                }
+            });
+        }
+
+        function subscribe(plan) {
+            const planNames = {
+                'basic': 'Basic',
+                'standard': 'Standard',
+                'premium': 'Premium'
+            };
+            
+            const planPrices = {
+                'basic': 649,
+                'standard': 899,
+                'premium': 1299
+            };
+            
+            alert(`Thank you for choosing the ${planNames[plan]} plan!\nPrice: ₹${planPrices[plan]}/month\n\nIn a real implementation, this would redirect to a payment page.`);
+        }
+
+        function watchNow(movieId) {
+            const movies = getMovies();
+            const movie = movies.find(m => m.id == movieId);
+            if (movie) {
+                alert(`Now playing: ${movie.title}\n\nIn a real OTT service, this would start streaming the movie.`);
+            }
+        }
+
+        function showAdminLogin() {
+            const password = prompt('Enter admin password:');
+            if (password === 'admin123') {
+                loginAdmin();
+                alert('Admin login successful!');
+                window.location.href = 'admin/index.html';
+            } else if (password) {
+                alert('Incorrect password!');
+            }
+        }
+    </script>
+    
+    <style>
+        .page-content {
+            padding: 2rem 0;
+            background: #f0f2f5;
+        }
+        
+        .ott-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .subscription-plans h2, .featured-content h2, .devices h2 {
+            color: #667eea;
+            margin-bottom: 2rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .plan-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .plan-card.popular {
+            border-color: #ffc107;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffc107;
+            color: #212529;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        
+        .plan-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .plan-header h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-price .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+        
+        .plan-price .period {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-features li {
+            padding: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .plan-features li i.fa-check {
+            color: #28a745;
+        }
+        
+        .plan-features li i.fa-times {
+            color: #dc3545;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+        
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .content-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .content-info {
+            padding: 1.5rem;
+        }
+        
+        .content-info h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .content-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .rating {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+        
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .device-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .device-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .device-card i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .device-card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .device-card p {
+            color: #666;
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .plan-card.popular {
+                transform: scale(1);
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .devices-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</body>
+</html>

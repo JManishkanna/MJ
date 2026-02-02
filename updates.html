@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updates - CineBook</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> CineBook</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="movies.html"><i class="fas fa-video"></i> Movies</a></li>
+                    <li><a href="theaters.html"><i class="fas fa-landmark"></i> Theaters</a></li>
+                    <li><a href="snacks.html"><i class="fas fa-popcorn"></i> Snacks</a></li>
+                    <li><a href="parking.html"><i class="fas fa-parking"></i> Parking</a></li>
+                    <li><a href="updates.html" class="active"><i class="fas fa-bell"></i> Updates</a></li>
+                    <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="ott.html"><i class="fas fa-tv"></i> OTT</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="adminLoginBtn">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Updates Page -->
+    <section class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Latest Updates</h1>
+                <p>Stay updated with the latest movies and news</p>
+            </div>
+            
+            <div class="updates-container">
+                <div class="updates-section">
+                    <h2><i class="fas fa-film"></i> Upcoming Movies</h2>
+                    <div class="movies-grid" id="upcomingMovies">
+                        <!-- Upcoming movies will be loaded dynamically -->
+                    </div>
+                </div>
+                
+                <div class="updates-section">
+                    <h2><i class="fas fa-bullhorn"></i> Latest News</h2>
+                    <div class="news-list">
+                        <div class="news-item">
+                            <div class="news-date">Feb 2, 2026</div>
+                            <h3>New 4DX Experience Now Available</h3>
+                            <p>Experience movies like never before with our new 4DX theater featuring motion seats, wind, and special effects.</p>
+                        </div>
+                        <div class="news-item">
+                            <div class="news-date">Jan 28, 2026</div>
+                            <h3>Valentine's Day Special Offers</h3>
+                            <p>Book your romantic movie date and get 20% off on couple combos including tickets and snacks.</p>
+                        </div>
+                        <div class="news-item">
+                            <div class="news-date">Jan 20, 2026</div>
+                            <h3>Mobile App Now Available</h3>
+                            <p>Download our new mobile app for easier booking, exclusive offers, and mobile tickets.</p>
+                        </div>
+                        <div class="news-item">
+                            <div class="news-date">Jan 15, 2026</div>
+                            <h3>Premium Seating Now Available</h3>
+                            <p>Enjoy our new premium reclining seats with extra legroom and personal side tables.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CineBook</h3>
+                    <p>Your ultimate destination for movie entertainment</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="theaters.html">Theaters</a></li>
+                        <li><a href="snacks.html">Snacks</a></li>
+                        <li><a href="history.html">Booking History</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CineBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUpcomingMovies();
+            setupEventListeners();
+        });
+
+        function loadUpcomingMovies() {
+            const upcomingMovies = getUpcomingMovies();
+            const container = document.getElementById('upcomingMovies');
+            
+            if (upcomingMovies.length === 0) {
+                container.innerHTML = '<p class="no-updates">No upcoming movies at the moment. Check back soon!</p>';
+                return;
+            }
+            
+            container.innerHTML = upcomingMovies.map(movie => `
+                <div class="movie-card">
+                    <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
+                    <div class="movie-info">
+                        <h3>${movie.title}</h3>
+                        <div class="movie-meta">
+                            <span><i class="fas fa-calendar"></i> ${new Date(movie.releaseDate).toLocaleDateString()}</span>
+                        </div>
+                        <p>${movie.description}</p>
+                        <button class="btn" onclick="alert('Coming soon! We\\'ll notify you when tickets are available.')">
+                            <i class="fas fa-bell"></i> Notify Me
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setupEventListeners() {
+            document.getElementById('adminLoginBtn').addEventListener('click', function() {
+                if (isAdmin()) {
+                    window.location.href = 'admin/index.html';
+                } else {
+                    showAdminLogin();
+                }
+            });
+        }
+
+        function showAdminLogin() {
+            const password = prompt('Enter admin password:');
+            if (password === 'admin123') {
+                loginAdmin();
+                alert('Admin login successful!');
+                window.location.href = 'admin/index.html';
+            } else if (password) {
+                alert('Incorrect password!');
+            }
+        }
+    </script>
+    
+    <style>
+        .page-content {
+            padding: 2rem 0;
+            background: #f0f2f5;
+        }
+        
+        .updates-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .updates-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .news-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+        
+        .news-date {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-item h3 {
+            color: #333;
+            margin-bottom: 0.8rem;
+        }
+        
+        .news-item p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .no-updates {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .updates-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
